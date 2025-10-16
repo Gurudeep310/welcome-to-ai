@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Birthday, Prafulla Mam!</title>
@@ -280,95 +281,148 @@
     .award { background: linear-gradient(90deg, var(--primary-accent), var(--secondary-accent)); color: #000; border-radius: 20px; padding: 6px 12px; display: inline-block; font-weight: bold; margin-top: 15px; box-shadow: 0 0 15px rgba(148, 0, 211, 0.5); }
     .wrap { max-width: 1100px; margin: 50px auto; padding: 24px; text-align: left; }
     .timeline { position: relative; padding-left: 45px; transition: all 450ms ease; }
-.timeline:before {
-  content: '';
-  position: absolute;
-  left: 20px;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: linear-gradient(180deg, var(--primary-accent) 0%, var(--secondary-accent) 100%);
-  border-radius: 4px;
-  box-shadow: var(--glow-primary);
-  /* 👇 ADD THIS LINE 👇 */
-  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  transition: opacity 0.4s ease;
-}
-/* Find this existing rule */
-.milestone {
-  position: relative;
-  margin: 30px 0;
-  padding: 20px;
-  opacity: 0;
-  transform: translateX(24px);
-  /* 👇 UPDATE THIS LINE 👇 (add margin and flex) */
-  transition: all 700ms cubic-bezier(.2,.9,.2,1), margin 0.6s ease, flex 0.6s ease;
-}    .milestone.visible { opacity: 1; transform: translateX(0); }
-/* Find this existing rule */
-.milestone .dot {
-  position: absolute;
-  left: -40px;
-  top: 22px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, var(--primary-accent), #45c4ff);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #002734;
-  font-weight: 700;
-  border: 3px solid var(--bg-start);
-  box-shadow: 0 0 15px var(--primary-accent);
-  /* 👇 ADD THIS LINE 👇 */
-  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  transition: opacity 0.4s ease;
-}    .controls { display: flex; gap: 12px; margin-top: 20px; margin-bottom: 20px; }
+    .timeline:before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--primary-accent) 0%, var(--secondary-accent) 100%);
+    border-radius: 4px;
+    box-shadow: var(--glow-primary);
+    /* 👇 ADD THIS LINE 👇 */
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    transition: opacity 0.4s ease;
+    }
+    /* Find this existing rule */
+    .milestone {
+    position: relative;
+    margin: 30px 0;
+    padding: 20px;
+    opacity: 0;
+    transform: translateX(24px);
+    /* 👇 UPDATE THIS LINE 👇 (add margin and flex) */
+    transition: all 700ms cubic-bezier(.2,.9,.2,1), margin 0.6s ease, flex 0.6s ease;
+    }    .milestone.visible { opacity: 1; transform: translateX(0); }
+    /* Find this existing rule */
+    .milestone .dot {
+    position: absolute;
+    left: -40px;
+    top: 22px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, var(--primary-accent), #45c4ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #002734;
+    font-weight: 700;
+    border: 3px solid var(--bg-start);
+    box-shadow: 0 0 15px var(--primary-accent);
+    /* 👇 ADD THIS LINE 👇 */
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    transition: opacity 0.4s ease;
+    }    
+    .controls { display: flex; gap: 12px; margin-top: 20px; margin-bottom: 20px; }
     .details { margin-top: 34px; padding: 25px; }
     .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
     .chip { background: rgba(0, 229, 255, 0.1); padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(0, 229, 255, 0.2); color: var(--primary-accent); font-weight: 600; font-size: 0.9rem; transition: background 0.3s, color 0.3s; }
     footer { margin-top: 60px; padding: 30px; font-size: 0.9rem; opacity: 0.7; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); }
     .highlight-glow { box-shadow: 0 0 25px var(--secondary-accent), 0 0 15px var(--primary-accent); border-color: var(--primary-accent) !important; transform: translateY(-2px) scale(1.02); }
-/* ==== ADD THIS CSS TO FIX THE TOGGLE ==== */
-.timeline.horizontal {
-    display: flex; 
-    overflow-x: auto; 
-    padding-left: 8px; 
-    gap: 18px;
-    padding-bottom: 20px; /* Gives space for the scrollbar */
-    /* Custom scrollbar styles */
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary-accent) var(--bg-start);
-}
-.timeline.horizontal::before {
-  /* The line animates to a horizontal position */
-  top: 42px;
-  left: 0;
-  right: 0;
-  bottom: auto;
-  width: auto;
-  height: 4px;
-}
-.timeline.horizontal .milestone {
-    min-width: 320px; /* Ensures cards don't get squished */
-    flex: 0 0 auto;   /* Prevents shrinking */
-    opacity: 1;
-    transform: none;
-    margin: 20px 0;
-}
-.timeline.horizontal .milestone .dot {
-    opacity: 0;
-}
-.timeline.horizontal::-webkit-scrollbar { height: 8px; }
-.timeline.horizontal::-webkit-scrollbar-track { background: transparent; }
-.timeline.horizontal::-webkit-scrollbar-thumb { 
-    background-color: var(--primary-accent); 
-    border-radius: 10px; 
-    border: 2px solid var(--bg-start); 
-}
-.timeline.horizontal:before,
+    /* ==== ADD THIS CSS TO FIX THE TOGGLE ==== */
+    .timeline.horizontal {
+        display: flex; 
+        overflow-x: auto; 
+        padding-left: 8px; 
+        gap: 18px;
+        padding-bottom: 20px; /* Gives space for the scrollbar */
+        /* Custom scrollbar styles */
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary-accent) var(--bg-start);
+    }
+    .timeline.horizontal::before {
+    /* The line animates to a horizontal position */
+    top: 42px;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    width: auto;
+    height: 4px;
+    }
+    .timeline.horizontal .milestone {
+        min-width: 320px; /* Ensures cards don't get squished */
+        flex: 0 0 auto;   /* Prevents shrinking */
+        opacity: 1;
+        transform: none;
+        margin: 20px 0;
+    }
+    .timeline.horizontal .milestone .dot {
+        opacity: 0;
+    }
+    .timeline.horizontal::-webkit-scrollbar { height: 8px; }
+    .timeline.horizontal::-webkit-scrollbar-track { background: transparent; }
+    .timeline.horizontal::-webkit-scrollbar-thumb { 
+        background-color: var(--primary-accent); 
+        border-radius: 10px; 
+        border: 2px solid var(--bg-start); 
+    }
+    .timeline.horizontal:before,
 
+    /* ==== ADD THIS CSS FOR THE CHATBOT TYPING INDICATOR ==== */
+    .typing-indicator {
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+        opacity: 0; /* Hidden by default */
+        transition: opacity 0.3s ease;
+    }
+    .typing-indicator.show {
+        opacity: 1; /* Made visible via JavaScript */
+    }
+    .typing-indicator span {
+        height: 8px;
+        width: 8px;
+        margin: 0 2px;
+        background-color: var(--muted);
+        border-radius: 50%;
+        display: inline-block;
+        animation: pulse 1.4s infinite ease-in-out both;
+    }
+    .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+    .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes pulse {
+        0%, 80%, 100% { transform: scale(0); }
+        40% { transform: scale(1.0); }
+    }
+
+    /* REPLACE your old typing indicator CSS with this */
+.typing-animation {
+    display: inline-flex; /* Aligns dots on the same line */
+    align-items: center;
+    padding-left: 5px;
+}
+.typing-animation span {
+    height: 8px;
+    width: 8px;
+    margin: 0 2px;
+    background-color: var(--muted);
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse 1.4s infinite ease-in-out both;
+}
+.typing-animation span:nth-child(1) { animation-delay: -0.32s; }
+.typing-animation span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes pulse {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1.0); }
+}
   </style>
+
+
 </head>
 <body>
     <div id="login-gate">
@@ -422,9 +476,10 @@
         <div class="chat-box glass-card">
             <h3>💬 Chat with ProfBot</h3>
             <div id="messages"></div>
+
             <div class="input-area">
-            <input type="text" id="userInput" placeholder="Ask about AI..." onkeypress="if(event.key==='Enter') sendMsg()">
-            <button onclick="sendMsg()">Send</button>
+                <input type="text" id="userInput" placeholder="Ask about AI..." onkeypress="if(event.key==='Enter') sendMsg()">
+                <button onclick="sendMsg()">Send</button>
             </div>
         </div>
 
@@ -460,29 +515,31 @@
     // === NEW: AUTHENTICATION LOGIC ===
     // =======================================================
     // 🚨 IMPORTANT: CHANGE THIS TO YOUR REAL PASSWORD!
-    const SECRET_PASSWORD = 'prafullamambhday'; 
+    const SECRET_HASH = '4b665f3f6e7e17c4c02db4bac460334691095e32c298aa4887c730adb47020c4';
 
     function checkPassword() {
-        const input = document.getElementById('passwordInput').value.trim();
+        const inputEl = document.getElementById('passwordInput');
         const errorEl = document.getElementById('errorMsg');
+        const enteredPassword = inputEl.value.trim();
         
-        // Check if the password is correct
-        if (input === SECRET_PASSWORD) {
-            // SUCCESS: Hide the gate and show the content
+        // 1. Hash the password the user entered using the SHA256 algorithm.
+        const enteredPasswordHash = CryptoJS.SHA256(enteredPassword).toString();
+
+        // 2. Compare the hash of the user's input to our stored secret hash.
+        if (enteredPasswordHash === SECRET_HASH) {
+            // SUCCESS: The hashes match!
             document.getElementById('login-gate').style.display = 'none';
             document.getElementById('main-content').classList.remove('hidden-content');
             
-            // Start all the cool page features
             document.body.classList.add('loaded'); // Re-initiate fade-in effect
-            initBirthdayFeatures();
-            populateGallery();
-            initStarrySky();
-            
+            // The features will already be initialized from the DOMContentLoaded event,
+            // so this works perfectly.
+
         } else {
-            // FAILURE: Display error
+            // FAILURE: The hashes do not match.
             errorEl.textContent = '❌ Incorrect secret code. Please try again.';
-            document.getElementById('passwordInput').value = ''; // Clear input
-            document.getElementById('passwordInput').focus();
+            inputEl.value = ''; // Clear input
+            inputEl.focus();
         }
     }
 
@@ -629,19 +686,26 @@
             balloonContainer.appendChild(balloon);
         }
 
-        // Music Control
+        // ✅ NEW & IMPROVED MUSIC CONTROL LOGIC
         const musicControl = document.getElementById('music-control');
         const birthdayMusic = document.getElementById('birthday-music');
-        let isPlaying = false;
-        musicControl.addEventListener('click', () => {
-            if (isPlaying) {
-                birthdayMusic.pause();
-                musicControl.textContent = '▶️ Play';
+        
+        musicControl.addEventListener('click', async () => {
+            // Check if music is paused or hasn't started
+            if (birthdayMusic.paused) {
+                try {
+                    // 'await' waits for the play() command to succeed before continuing
+                    await birthdayMusic.play();
+                    musicControl.textContent = '⏸️ Pause';
+                } catch (error) {
+                    console.error("Audio playback failed:", error);
+                    musicControl.textContent = '▶️ Play Failed';
+                }
             } else {
-                birthdayMusic.play();
-                musicControl.textContent = '⏸️ Pause';
+                // If it's already playing, just pause it
+                birthdayMusic.pause();
+                musicControl.textContent = '▶️ A Sweet Suprise';
             }
-            isPlaying = !isPlaying;
         });
     }
 
@@ -710,16 +774,129 @@
     const userInput = document.getElementById('userInput');
     let botIsTyping = false;
     function addMessage(className, html) { const msgDiv = document.createElement('div'); msgDiv.className = `msg ${className}`; msgDiv.innerHTML = html; messagesEl.appendChild(msgDiv); messagesEl.scrollTop = messagesEl.scrollHeight; return msgDiv; }
-    function typeResponse(botMsgDiv, text) { let i = 0; const speed = 30; botIsTyping = true; userInput.disabled = true; function typing() { if (i < text.length) { if (text.charAt(i) === '<') { const c = text.indexOf('>', i); botMsgDiv.innerHTML += text.substring(i, c + 1); i = c; } else { botMsgDiv.innerHTML += text.charAt(i); } i++; messagesEl.scrollTop = messagesEl.scrollHeight; setTimeout(typing, speed); } else { botIsTyping = false; userInput.disabled = false; userInput.focus(); } } typing(); }
+function typeResponse(botMsgDiv, text, onComplete) {
+    // NEW: Clear the typing dots and start with a clean slate
+    botMsgDiv.innerHTML = '🤖 ProfBot: '; 
+
+    let i = 0;
+    const speed = 25;
+    botIsTyping = true;
+    userInput.disabled = true;
+
+    function typing() {
+        if (i < text.length) {
+            if (text.charAt(i) === '<') {
+                const c = text.indexOf('>', i);
+                botMsgDiv.innerHTML += text.substring(i, c + 1);
+                i = c;
+            } else {
+                botMsgDiv.innerHTML += text.charAt(i);
+            }
+            i++;
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+            setTimeout(typing, speed);
+        } else {
+            botIsTyping = false;
+            userInput.disabled = false;
+            userInput.focus();
+            if (onComplete) {
+                onComplete();
+            }
+        }
+    }
+    typing();
+}
     function highlightElement(selector) { const el = document.querySelector(selector); if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.classList.add('highlight-glow'); setTimeout(() => { el.classList.remove('highlight-glow'); }, 3000); } }
-    const profBotKnowledge = { 'default': "That's a fascinating question! Could you ask me something about the Professor's career or a specific AI topic?", 'greeting': { keywords: ['hello', 'hi'], response: "Hello! I'm ProfBot. Ask me about Prafulla Mam's career, research, or any general AI concepts." }, 'birthday': { keywords: ['birthday', 'happy'], response: "Thank you! Celebrating a great mentor is the most logical and wonderful occasion. The best gift is always more data... I mean, knowledge! 🎂" }, 'research': { keywords: ['research', 'interests'], response: "Prafulla Mam's research is fascinating! She focuses on Machine Learning, Computer Vision, and their applications in areas like Heritage Conservation. A brilliant blend of the old and the new.", elementId: 'details' }, 'mahindra': { keywords: ['mahindra'], response: "She joined Mahindra University in 2017, where she has been an Assistant Professor and was instrumental in co-founding the Center for Sustainable Infrastructure and Systems (CSIS).", milestoneId: 'mahindra' }, 'bits pilani': { keywords: ['bits', 'pilani'], response: "She had a significant tenure at BITS Pilani, Hyderabad Campus, from 2010 to 2017 as a Lecturer. She was heavily involved in developing labs and mentoring numerous student research projects.", milestoneId: 'bits' } };
-    function getBotResponse(userInput) { const text = userInput.toLowerCase(); for (const key in profBotKnowledge) { if (key !== 'default') { for (const keyword of profBotKnowledge[key].keywords) { if (text.includes(keyword)) { return profBotKnowledge[key]; } } } } return { response: profBotKnowledge.default }; }
-    function sendMsg() { if (botIsTyping) return; const text = userInput.value.trim(); if (!text) return; addMessage('user', `🧑‍🎓 You: ${text}`); userInput.value = ''; setTimeout(() => { const botResponseData = getBotResponse(text); const botMsgDiv = addMessage('bot', '🤖 ProfBot: '); typeResponse(botMsgDiv, botResponseData.response); if (botResponseData.elementId) { highlightElement(`#${botResponseData.elementId}`); } else if (botResponseData.milestoneId) { highlightElement(`[data-milestone="${botResponseData.milestoneId}"]`); } }, 800); }
-    function initiateBotGreeting() { const greetText = "Greetings! I'm ProfBot, an AI tribute to Prafulla Mam. You can ask me about her journey, research, or AI concepts! Try asking 'What is her research focus?'."; 
+    const profBotKnowledge = {
+        'greeting': {
+            keywords: ['hello', 'hi', 'hey', 'greetings'],
+            response: "Hello! I am ProfBot, an AI tribute to Prafulla Mam. Ask me about her career, research, or type 'help' for more options."
+        },
+        'birthday': {
+            keywords: ['birthday', 'happy'],
+            response: "Thank you! It's a wonderful occasion to celebrate such a great mentor. The best gift is always more knowledge! 🎂"
+        },
+        'research': {
+            keywords: ['research', 'interests', 'focus', 'work on', 'specializes'],
+            response: "Prafulla Mam's research is fascinating! She focuses on Machine Learning, Computer Vision, and their applications in areas like Heritage Conservation. I can highlight that section for you.",
+            elementId: 'details'
+        },
+        'mahindra': {
+            keywords: ['mahindra'],
+            response: "Ah, Mahindra University! She joined in 2017 as an Assistant Professor and was instrumental in co-founding the Center for Sustainable Infrastructure and Systems (CSIS).",
+            milestoneId: 'mahindra'
+        },
+        'bits pilani': {
+            keywords: ['bits', 'pilani'],
+            response: "She had a significant tenure at BITS Pilani's Hyderabad Campus from 2010 to 2017. As a Lecturer, she developed labs and mentored countless student projects.",
+            milestoneId: 'bits'
+        },
+        'creator': {
+            keywords: ['who made you', 'creator', 'developer', 'built this'],
+            response: "I was created with ❤️ by her students to celebrate her special day. This page is a small tribute to her immense impact!"
+        },
+        'thanks': {
+            keywords: ['thanks', 'thank you', 'cool', 'awesome'],
+            response: "You're welcome! Is there anything else about her journey you'd like to know?"
+        },
+        'help': {
+            keywords: ['help', 'options', 'what can you do'],
+            response: "You can ask me about: <br> • Her <b>research</b> interests <br> • Her time at <b>BITS Pilani</b> or <b>Mahindra</b> <br> • Or just wish her a <b>Happy Birthday</b>!"
+        },
+        'default': "That's an interesting thought! My knowledge is focused on Prafulla Mam's journey. Try asking me about her 'research' or 'career milestones'."
+    };
+    function getBotResponse(userInput) {
+        // No need to convert to lower case here, the regex will handle it.
+        for (const key in profBotKnowledge) {
+            if (key !== 'default') {
+                for (const keyword of profBotKnowledge[key].keywords) {
+                    // This creates a rule to match the keyword as a whole word, case-insensitively.
+                    // For example, it looks for '\bhi\b' which means the word "hi", not the letters inside "Mahindra".
+                    const rule = new RegExp('\\b' + keyword + '\\b', 'i');
+                    
+                    if (rule.test(userInput)) {
+                        return profBotKnowledge[key]; // Returns the correct response.
+                    }
+                }
+            }
+        }
+        // If no keywords match, return the default response.
+        return { response: profBotKnowledge.default };
+    }
+
+    function sendMsg() {
+    if (botIsTyping) return;
+    const text = userInput.value.trim();
+    if (!text) return;
+
+    addMessage('user', `🧑‍🎓 You: ${text}`);
+    userInput.value = '';
+
+    // NEW: Create the bot's message box immediately
+    const botMsgDiv = addMessage('bot', ''); 
+    
+    // NEW: Put the typing animation inside the new message box
+    botMsgDiv.innerHTML = `🤖 ProfBot: <div class="typing-animation"><span></span><span></span><span></span></div>`;
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+
+    // Simulate bot "thinking"
+    setTimeout(() => {
+        const botResponseData = getBotResponse(text);
         
+        // Pass the message box to typeResponse to have its content replaced
+        typeResponse(botMsgDiv, botResponseData.response, () => {
+            if (botResponseData.elementId) {
+                highlightElement(`#${botResponseData.elementId}`);
+            } else if (botResponseData.milestoneId) {
+                highlightElement(`[data-milestone="${botResponseData.milestoneId}"]`);
+            }
+        });
+
+    }, 600 + Math.random() * 400); 
+}
+    function initiateBotGreeting() { const greetText = "Greetings! I'm ProfBot. You can ask me about Prafulla Mam's journey. Try asking 'help' to see what I can do!'."; 
         // ✅ FIX: Directly add the message instead of animating it
         addMessage('bot', `🤖 ProfBot: ${greetText}`); 
-        
         // Since the message is static, we can immediately enable the input field
         userInput.disabled = false;
         userInput.focus();
