@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Birthday, Prafulla Mam!</title>
@@ -387,7 +388,7 @@
             <h1 class="birthday-title">Happy Birthday Prafulla Mam!</h1>
             <p style="color: var(--muted); font-size: 1.2rem;">Wishing you a fantastic day filled with joy and discovery.</p>
             <button id="music-control">▶️ A Sweet Suprise</button>
-            <audio id="birthday-music" loop src="Sri K.Viswanath Birthday Wishes.mp3"></audio>
+            <audio id="birthday-music" loop src="Sri-KViswanath-Birthday-Wishes.mp3"></audio>
         </section>
 
         <h1>🎂 AI Tribute & Journey</h1>
@@ -460,29 +461,31 @@
     // === NEW: AUTHENTICATION LOGIC ===
     // =======================================================
     // 🚨 IMPORTANT: CHANGE THIS TO YOUR REAL PASSWORD!
-    const SECRET_PASSWORD = 'prafullamambhday'; 
+    const SECRET_HASH = '4b665f3f6e7e17c4c02db4bac460334691095e32c298aa4887c730adb47020c4';
 
     function checkPassword() {
-        const input = document.getElementById('passwordInput').value.trim();
+        const inputEl = document.getElementById('passwordInput');
         const errorEl = document.getElementById('errorMsg');
+        const enteredPassword = inputEl.value.trim();
         
-        // Check if the password is correct
-        if (input === SECRET_PASSWORD) {
-            // SUCCESS: Hide the gate and show the content
+        // 1. Hash the password the user entered using the SHA256 algorithm.
+        const enteredPasswordHash = CryptoJS.SHA256(enteredPassword).toString();
+
+        // 2. Compare the hash of the user's input to our stored secret hash.
+        if (enteredPasswordHash === SECRET_HASH) {
+            // SUCCESS: The hashes match!
             document.getElementById('login-gate').style.display = 'none';
             document.getElementById('main-content').classList.remove('hidden-content');
             
-            // Start all the cool page features
             document.body.classList.add('loaded'); // Re-initiate fade-in effect
-            initBirthdayFeatures();
-            populateGallery();
-            initStarrySky();
-            
+            // The features will already be initialized from the DOMContentLoaded event,
+            // so this works perfectly.
+
         } else {
-            // FAILURE: Display error
+            // FAILURE: The hashes do not match.
             errorEl.textContent = '❌ Incorrect secret code. Please try again.';
-            document.getElementById('passwordInput').value = ''; // Clear input
-            document.getElementById('passwordInput').focus();
+            inputEl.value = ''; // Clear input
+            inputEl.focus();
         }
     }
 
@@ -629,19 +632,26 @@
             balloonContainer.appendChild(balloon);
         }
 
-        // Music Control
+        // ✅ NEW & IMPROVED MUSIC CONTROL LOGIC
         const musicControl = document.getElementById('music-control');
         const birthdayMusic = document.getElementById('birthday-music');
-        let isPlaying = false;
-        musicControl.addEventListener('click', () => {
-            if (isPlaying) {
-                birthdayMusic.pause();
-                musicControl.textContent = '▶️ Play';
+        
+        musicControl.addEventListener('click', async () => {
+            // Check if music is paused or hasn't started
+            if (birthdayMusic.paused) {
+                try {
+                    // 'await' waits for the play() command to succeed before continuing
+                    await birthdayMusic.play();
+                    musicControl.textContent = '⏸️ Pause';
+                } catch (error) {
+                    console.error("Audio playback failed:", error);
+                    musicControl.textContent = '▶️ Play Failed';
+                }
             } else {
-                birthdayMusic.play();
-                musicControl.textContent = '⏸️ Pause';
+                // If it's already playing, just pause it
+                birthdayMusic.pause();
+                musicControl.textContent = '▶️ A Sweet Suprise';
             }
-            isPlaying = !isPlaying;
         });
     }
 
