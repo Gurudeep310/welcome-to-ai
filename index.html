@@ -3,20 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Tribute & Journey — Prof. Prafulla Kalapatapu</title>
+  <title>Happy Birthday, Prafulla Mam!</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins&display=swap" rel="stylesheet">
   <style>
+    /* NEW: Styles for the login gate */
+    #login-gate {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-start); /* Dark background */
+    z-index: 9999; /* Ensure it's on top of everything */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    }
+    #login-gate input {
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--primary-accent);
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    font-size: 1.1rem;
+    width: 300px;
+    max-width: 80%;
+    }
+    .hidden-content {
+    display: none; /* Class to hide the main body content initially */
+    }
+
     /* ==== GLOBAL STYLES & THEME ==== */
     :root {
       --primary-accent: #00ffff;
       --secondary-accent: #9400d3;
       --muted: #9aa4b2;
       --bg-start: #0a0e1a;
-      --bg-end: #000;
       --glow-primary: 0 0 20px rgba(0, 255, 255, 0.7);
-      --glow-secondary: 0 0 20px rgba(148, 0, 211, 0.5);
     }
-
     *{ box-sizing: border-box; }
     body {
       margin: 0;
@@ -29,304 +55,632 @@
       transition: opacity 1.5s ease-in;
     }
     body.loaded { opacity: 1; }
-    canvas#neural-network {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-    }
-    .highlight-glow {
-            box-shadow: 0 0 25px var(--secondary-accent), 0 0 15px var(--primary-accent);
-            border-color: var(--primary-accent) !important;
-            transform: translateY(-2px) scale(1.02);
-        }
-    h1, h2 {
-      margin: 20px 0;
-      color: var(--primary-accent);
-      text-shadow: var(--glow-primary);
-      animation: fadeInUp 0.8s ease-out;
-    }
+    canvas#neural-network { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+    h1, h2 { margin: 20px 0; color: var(--primary-accent); text-shadow: var(--glow-primary); animation: fadeInUp 0.8s ease-out; }
     h3 { color: #fff; }
 
     /* ==== SHARED COMPONENTS & EFFECTS ==== */
     .glass-card {
-        background: rgba(12, 16, 34, 0.4);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(0, 255, 255, 0.15);
-        border-radius: 16px;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      background: rgba(12, 16, 34, 0.4);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 255, 255, 0.15);
+      border-radius: 16px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     }
     .glass-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
-        border-color: rgba(0, 255, 255, 0.4);
+      transform: translateY(-8px);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+      border-color: rgba(0, 255, 255, 0.4);
     }
     button {
-      background: transparent;
-      color: var(--primary-accent);
-      border: 2px solid var(--primary-accent);
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: 0.3s;
-      text-shadow: 0 0 10px var(--primary-accent);
-      box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.3), 0 0 10px rgba(0, 255, 255, 0.3);
+      background: transparent; color: var(--primary-accent); border: 2px solid var(--primary-accent); padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; text-shadow: 0 0 10px var(--primary-accent); box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.3), 0 0 10px rgba(0, 255, 255, 0.3);
     }
-    button:hover {
-      background: var(--primary-accent);
-      color: #000;
-      box-shadow: var(--glow-primary);
+    button:hover { background: var(--primary-accent); color: #000; box-shadow: var(--glow-primary); }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ==== NEW: BIRTHDAY CELEBRATION SECTION ==== */
+    .birthday-celebration {
+        padding: 40px 20px;
+        position: relative;
+        overflow: hidden;
     }
-    @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+    .birthday-title { font-size: 2.5rem; color: var(--primary-accent); text-shadow: var(--glow-primary); }
+    #music-control { margin-top: 20px; }
+    .balloon {
+        position: absolute;
+        width: 50px; height: 60px;
+        background: rgba(255, 0, 0, 0.7);
+        border-radius: 50%;
+        bottom: -100px;
+        animation: floatUp 10s infinite ease-in;
+    }
+    .balloon:before {
+        content: ''; position: absolute;
+        bottom: -10px; left: 50%;
+        transform: translateX(-50%);
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 10px solid rgba(255, 0, 0, 0.7);
+    }
+    @keyframes floatUp {
+        to { transform: translateY(-120vh); }
+    }
+    canvas#confetti-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+
+    /* ==== NEW: MEMORY GALLERY ==== */
+    .memory-gallery { width: 90%; margin: 60px auto; }
+    /* Container */
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    }
+
+    /* Each gallery item */
+    .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+        cursor: pointer;
+        background: #f0f0f0;
+        height: 200px; /* fixed square height */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Images fill the square, cropped nicely */
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* crops image to fill container without distortion */
+        transition: transform 0.3s ease;
+    }
+
+    /* Zoom on hover */
+    .gallery-item:hover img {
+        transform: scale(1.05);
+    }
+
+    /* Caption overlay */
+    .gallery-item .caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 8px;
+        background: rgba(0,0,0,0.6);
+        color: #fff;
+        font-size: 14px;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover .caption {
+        opacity: 1;
+    }
+
+    /* Modal styles (unchanged) */
+    .modal {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.85);
+        display: flex; justify-content: center; align-items: center;
+        opacity: 0; pointer-events: none;
+        transition: opacity 0.5s ease;
+        z-index: 1000;
+    }
+
+    .modal.show {
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .modal-content {
+        max-width: 80vw;
+        max-height: 80vh;
+        text-align: center;
+        transform: scale(0.8);
+        transition: transform 0.4s ease;
+    }
+
+    .modal.show .modal-content {
+        transform: scale(1);
+    }
+
+    .modal-content img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .modal-caption {
+        color: #fff;
+        margin-top: 15px;
+        font-style: italic;
+    }
+    .modal-close { position: absolute; top: 20px; right: 30px; font-size: 2rem; color: #fff; cursor: pointer; }
+
+    /* ==== NEW: STARRY SKY WISH ==== */
+    .starry-sky {
+        width: 100%;
+        height: 70vh;
+        position: relative;
+        background: linear-gradient(to bottom, #020111 0%, #3a3a52 100%);
+        overflow: hidden;
+        margin: 60px 0;
+        padding: 40px 20px;
+        border-top: 1px solid rgba(0, 255, 255, 0.2);
+        border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+    }
+    .star {
+        position: absolute;
+        background-color: #fff;
+        border-radius: 50%;
+        box-shadow: 0 0 8px #fff, 0 0 16px #fff;
+        cursor: pointer;
+        animation: twinkle 2s infinite ease-in-out;
+        transition: transform 0.3s ease;
+    }
+    .star:hover {
+        transform: scale(1.5);
+    }
+    @keyframes twinkle {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; transform: scale(1.1); }
+    }
+    .star-modal {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex; justify-content: center; align-items: center;
+        opacity: 0; pointer-events: none; transition: opacity 0.3s ease; z-index: 1001;
+    }
+    .star-modal.show { opacity: 1; pointer-events: all; }
+    .star-modal-content {
+        padding: 40px;
+        background: rgba(12, 16, 34, 0.6);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(0, 255, 255, 0.2);
+        border-radius: 16px;
+        max-width: 500px;
+        color: #e0ffff;
+        font-size: 1.2rem;
+        font-style: italic;
+        text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+        position: relative;
+    }
+    #star-modal-close {
+        position: absolute; top: 10px; right: 20px;
+        font-size: 2rem; color: #fff; cursor: pointer;
     }
 
     /* ==== HERO SECTION ==== */
-    .prof-pic {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      border: 4px solid var(--primary-accent);
-      box-shadow: var(--glow-primary), 0 0 35px rgba(0,255,255,0.4);
-      object-fit: cover;
-      margin-top: 15px;
-      animation: fadeInUp 0.8s ease-out 0.2s backwards;
-    }
-    .quotes {
-      margin-top: 60px;
-      padding: 30px;
-      border-top: 1px solid rgba(0, 255, 255, 0.2);
-      border-bottom: 1px solid rgba(0, 255, 255, 0.2);
-      background: linear-gradient(rgba(148, 0, 211, 0.05), rgba(0, 255, 255, 0.05));
-    }
-    .quote {
-      font-size: 1.2rem;
-      color: #e0ffff;
-      font-style: italic;
-      min-height: 60px;
-      transition: opacity 0.7s ease-in-out;
-      text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
-    }
-
-    /* ==== CHAT BOT ==== */
-    .chat-box {
-      width: 90%;
-      max-width: 600px;
-      margin: 40px auto;
-      text-align: left;
-      padding: 25px;
-    }
+    .prof-pic { width: 200px; height: 200px; border-radius: 50%; border: 4px solid var(--primary-accent); box-shadow: var(--glow-primary), 0 0 35px rgba(0,255,255,0.4); object-fit: cover; margin-top: 15px; animation: fadeInUp 0.8s ease-out 0.2s backwards; }
+    
+    /* ==== EXISTING SECTIONS (CHAT, LEGENDS, TIMELINE, ETC.) ==== */
+    /* All other CSS from the previous version remains here */
+    .quotes { margin-top: 60px; padding: 30px; border-top: 1px solid rgba(0, 255, 255, 0.2); border-bottom: 1px solid rgba(0, 255, 255, 0.2); background: linear-gradient(rgba(148, 0, 211, 0.05), rgba(0, 255, 255, 0.05)); }
+    .quote { font-size: 1.2rem; color: #e0ffff; font-style: italic; min-height: 60px; transition: opacity 0.7s ease-in-out; text-shadow: 0 0 8px rgba(0, 255, 255, 0.5); }
+    .chat-box { width: 90%; max-width: 600px; margin: 40px auto; text-align: left; padding: 25px; }
     #messages { height: 150px; overflow-y: auto; margin-bottom: 15px; padding-right: 10px; }
     .msg { margin: 10px 0; line-height: 1.5; opacity: 0; animation: fadeInUp 0.5s forwards; }
     .user { color: var(--primary-accent); font-weight: 600; }
     .bot { color: #fff; }
     .input-area { display: flex; gap: 10px; }
-    input[type="text"] {
-      flex-grow: 1;
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid rgba(0, 255, 255, 0.2);
-      outline: none;
-      background: rgba(0,0,0,0.3);
-      color: #fff;
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
-    input[type="text"]:focus {
-      border-color: var(--primary-accent);
-      box-shadow: var(--glow-primary);
-    }
-    .typing-indicator span {
-        display: inline-block;
-        width: 8px; height: 8px; border-radius: 50%; background: var(--muted);
-        animation: pulse 1.4s infinite ease-in-out both;
-    }
-    .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
-    .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
-    @keyframes pulse {
-        0%, 80%, 100% { transform: scale(0); }
-        40% { transform: scale(1.0); }
-    }
-
-    /* ==== LEGENDS GRID ==== */
-    .legends {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      width: 90%;
-      margin: 40px auto 0;
-    }
+    input[type="text"] { flex-grow: 1; padding: 12px; border-radius: 8px; border: 1px solid rgba(0, 255, 255, 0.2); outline: none; background: rgba(0,0,0,0.3); color: #fff; transition: border-color 0.3s, box-shadow 0.3s; }
+    input[type="text"]:focus { border-color: var(--primary-accent); box-shadow: var(--glow-primary); }
+    .legends { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; width: 90%; margin: 40px auto 0; }
     .legend-card { padding: 25px; }
-    .legend-card:hover { border-color: var(--secondary-accent); }
-    .legend-img {
-      width: 130px; height: 130px; border-radius: 50%;
-      border: 3px solid var(--primary-accent);
-      object-fit: cover; margin-top: 10px;
-      box-shadow: var(--glow-primary);
-      transition: transform 0.4s ease;
-    }
-    .legend-card:hover .legend-img { transform: scale(1.05); }
+    .legend-img { width: 130px; height: 130px; border-radius: 50%; border: 3px solid var(--primary-accent); object-fit: cover; margin-top: 10px; box-shadow: var(--glow-primary); transition: transform 0.4s ease; }
     .legend-name { font-size: 1.3rem; margin: 15px 0 5px; color: var(--primary-accent); }
     .legend-title { font-size: 0.9rem; color: #ccc; }
-    .award {
-      background: linear-gradient(90deg, var(--primary-accent), var(--secondary-accent));
-      color: #000; border-radius: 20px; padding: 6px 12px;
-      display: inline-block; font-weight: bold; margin-top: 15px;
-      box-shadow: 0 0 15px rgba(148, 0, 211, 0.5);
-    }
-
-    /* ==== TIMELINE SECTION ==== */
+    .award { background: linear-gradient(90deg, var(--primary-accent), var(--secondary-accent)); color: #000; border-radius: 20px; padding: 6px 12px; display: inline-block; font-weight: bold; margin-top: 15px; box-shadow: 0 0 15px rgba(148, 0, 211, 0.5); }
     .wrap { max-width: 1100px; margin: 50px auto; padding: 24px; text-align: left; }
     .timeline { position: relative; padding-left: 45px; transition: all 450ms ease; }
-    .timeline:before {
-      content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 4px;
-      background: linear-gradient(180deg, var(--primary-accent) 0%, var(--secondary-accent) 100%);
-      border-radius: 4px;
-      box-shadow: var(--glow-primary);
-    }
-    .milestone {
-      position: relative; margin: 30px 0; padding: 20px;
-      opacity: 0; transform: translateX(24px);
-      transition: all 700ms cubic-bezier(.2,.9,.2,1);
-    }
-    .milestone.visible { opacity: 1; transform: translateX(0); }
-    .milestone .dot {
-      position: absolute; left: -40px; top: 22px; width: 40px; height: 40px; border-radius: 50%;
-      background: linear-gradient(180deg, var(--primary-accent), #45c4ff);
-      display: flex; align-items: center; justify-content: center; color: #002734; font-weight: 700;
-      border: 3px solid var(--bg-start);
-      box-shadow: 0 0 15px var(--primary-accent);
-    }
-    .milestone h3 { margin: 0 0 6px 0; color: #dffcff; }
-    .milestone .meta { font-size: 0.85rem; color: var(--muted); margin-bottom: 8px; }
-    .milestone .content { color: #cfefff; line-height: 1.5; }
-
-    /* Horizontal Timeline specific styles */
-    .timeline.horizontal {
-        display: flex; overflow-x: auto; padding-left: 8px; gap: 18px;
-        scrollbar-width: thin; scrollbar-color: var(--primary-accent) var(--bg-start);
-    }
-    .timeline.horizontal::-webkit-scrollbar { height: 8px; }
-    .timeline.horizontal::-webkit-scrollbar-track { background: var(--bg-start); }
-    .timeline.horizontal::-webkit-scrollbar-thumb { background-color: var(--primary-accent); border-radius: 10px; border: 2px solid var(--bg-start); }
-    .timeline.horizontal:before { display: none; }
-    .timeline.horizontal .milestone {
-        min-width: 320px; flex: 0 0 auto; opacity: 1; transform: none; margin: 20px 0;
-    }
-     .timeline.horizontal .milestone .dot { display: none; }
-
-
-    /* ==== CONTROLS & DETAILS ==== */
-    .controls { display: flex; gap: 12px; margin-top: 20px; margin-bottom: 20px; }
+.timeline:before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--primary-accent) 0%, var(--secondary-accent) 100%);
+  border-radius: 4px;
+  box-shadow: var(--glow-primary);
+  /* 👇 ADD THIS LINE 👇 */
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  transition: opacity 0.4s ease;
+}
+/* Find this existing rule */
+.milestone {
+  position: relative;
+  margin: 30px 0;
+  padding: 20px;
+  opacity: 0;
+  transform: translateX(24px);
+  /* 👇 UPDATE THIS LINE 👇 (add margin and flex) */
+  transition: all 700ms cubic-bezier(.2,.9,.2,1), margin 0.6s ease, flex 0.6s ease;
+}    .milestone.visible { opacity: 1; transform: translateX(0); }
+/* Find this existing rule */
+.milestone .dot {
+  position: absolute;
+  left: -40px;
+  top: 22px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, var(--primary-accent), #45c4ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #002734;
+  font-weight: 700;
+  border: 3px solid var(--bg-start);
+  box-shadow: 0 0 15px var(--primary-accent);
+  /* 👇 ADD THIS LINE 👇 */
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  transition: opacity 0.4s ease;
+}    .controls { display: flex; gap: 12px; margin-top: 20px; margin-bottom: 20px; }
     .details { margin-top: 34px; padding: 25px; }
     .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .chip {
-      background: rgba(0, 229, 255, 0.1);
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(0, 229, 255, 0.2);
-      color: var(--primary-accent);
-      font-weight: 600;
-      font-size: 0.9rem;
-      transition: background 0.3s, color 0.3s;
-    }
-    .chip:hover { background: var(--primary-accent); color: #000; }
-    #pubs li { margin-bottom: 8px; }
+    .chip { background: rgba(0, 229, 255, 0.1); padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(0, 229, 255, 0.2); color: var(--primary-accent); font-weight: 600; font-size: 0.9rem; transition: background 0.3s, color 0.3s; }
+    footer { margin-top: 60px; padding: 30px; font-size: 0.9rem; opacity: 0.7; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); }
+    .highlight-glow { box-shadow: 0 0 25px var(--secondary-accent), 0 0 15px var(--primary-accent); border-color: var(--primary-accent) !important; transform: translateY(-2px) scale(1.02); }
+/* ==== ADD THIS CSS TO FIX THE TOGGLE ==== */
+.timeline.horizontal {
+    display: flex; 
+    overflow-x: auto; 
+    padding-left: 8px; 
+    gap: 18px;
+    padding-bottom: 20px; /* Gives space for the scrollbar */
+    /* Custom scrollbar styles */
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-accent) var(--bg-start);
+}
+.timeline.horizontal::before {
+  /* The line animates to a horizontal position */
+  top: 42px;
+  left: 0;
+  right: 0;
+  bottom: auto;
+  width: auto;
+  height: 4px;
+}
+.timeline.horizontal .milestone {
+    min-width: 320px; /* Ensures cards don't get squished */
+    flex: 0 0 auto;   /* Prevents shrinking */
+    opacity: 1;
+    transform: none;
+    margin: 20px 0;
+}
+.timeline.horizontal .milestone .dot {
+    opacity: 0;
+}
+.timeline.horizontal::-webkit-scrollbar { height: 8px; }
+.timeline.horizontal::-webkit-scrollbar-track { background: transparent; }
+.timeline.horizontal::-webkit-scrollbar-thumb { 
+    background-color: var(--primary-accent); 
+    border-radius: 10px; 
+    border: 2px solid var(--bg-start); 
+}
+.timeline.horizontal:before,
 
-    footer {
-      margin-top: 60px;
-      padding: 30px;
-      font-size: 0.9rem;
-      opacity: 0.7;
-      text-align: center;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
   </style>
 </head>
 <body>
-
-  <canvas id="neural-network"></canvas>
-
-  <h1>🎂 Happy Birthday, Professor!</h1>
-  <img src="professor.jpg" class="prof-pic" alt="Professor">
-  <h2>Celebrating an Inspiring AI Mind 🤖</h2>
-
-  <div class="chat-box glass-card">
-    <h3>💬 Chat with ProfBot</h3>
-    <div id="messages"></div>
-    <div class="input-area">
-      <input type="text" id="userInput" placeholder="Ask about AI..." onkeypress="if(event.key==='Enter') sendMsg()">
-      <button onclick="sendMsg()">Send</button>
+    <div id="login-gate">
+        <h1 style="color:var(--primary-accent);">AI Tribute Access Required 🔒</h1>
+        <p style="color:var(--muted); font-size: 1.1rem;">Please enter the password to view the tribute.</p>
+        <input type="password" id="passwordInput" placeholder="Enter Secret Code" onkeypress="if(event.key==='Enter') checkPassword()">
+        <button onclick="checkPassword()">Access Page</button>
+        <p id="errorMsg" style="color:red; margin-top:10px;"></p>
     </div>
-  </div>
+    <div id="main-content" class="hidden-content">
+        <canvas id="neural-network"></canvas>
+        <canvas id="confetti-canvas"></canvas>
 
-  <h1>🌟 AI Hall of Fame</h1>
-  <p class="subtitle">Celebrating the Minds Who Shaped Artificial Intelligence</p>
-  <section class="legends">
-    <div class="legend-card glass-card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Alan_Turing_Aged_16.jpg" class="legend-img" alt="Alan Turing">
-      <div class="legend-name">Alan Turing</div>
-      <div class="legend-title">The Father of Computer Science</div>
-      <div class="award">🏆 AI Visionary</div>
-    </div>
-    <div class="legend-card glass-card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Yann_LeCun.jpg" class="legend-img" alt="Yann LeCun">
-      <div class="legend-name">Yann LeCun</div>
-      <div class="legend-title">Pioneer of Deep Learning</div>
-      <div class="award">🏆 Neural Network Innovator</div>
-    </div>
-    <div class="legend-card glass-card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Fei-Fei_Li_Stanford.jpg" class="legend-img" alt="Fei-Fei Li">
-      <div class="legend-name">Fei-Fei Li</div>
-      <div class="legend-title">Computer Vision Leader</div>
-      <div class="award">🏆 AI Ethics Advocate</div>
-    </div>
-    <div class="legend-card glass-card">
-      <img src="professor.jpg" class="legend-img" alt="Professor">
-      <div class="legend-name">Prof. Prafulla Kalapatapu</div>
-      <div class="legend-title">Most Inspiring AI Mentor</div>
-      <div class="award">🏅 "AI Educator of the Year 2025"</div>
-    </div>
-  </section>
+        <section class="birthday-celebration">
+            <div id="balloon-container"></div>
+            <h1 class="birthday-title">Happy Birthday Prafulla Mam!</h1>
+            <p style="color: var(--muted); font-size: 1.2rem;">Wishing you a fantastic day filled with joy and discovery.</p>
+            <button id="music-control">▶️ A Sweet Suprise</button>
+            <audio id="birthday-music" loop src="Sri K.Viswanath Birthday Wishes.mp3"></audio>
+        </section>
 
-  <section class="quotes">
-    <div class="quote" id="quoteBox">
-      “AI is not just about machines learning — it’s about humans learning how to think differently.”
+        <h1>🎂 AI Tribute & Journey</h1>
+        <img src="https://drive.google.com/thumbnail?id=1KXM5MjAtef6ePzWJaHQPdXZ3AL08DFaa&sz=w1000" alt="Professor" class="prof-pic">
+        <h2>Celebrating an Inspiring AI Mind 🤖</h2>
+
+            <section class="memory-gallery">
+                <h1>Memory Gallery</h1>
+                <div class="gallery-grid" id="gallery-grid"></div>
+            </section>
+
+            <!-- Modal for enlarged image -->
+            <div class="modal" id="gallery-modal">
+                <span class="modal-close" id="modal-close">&times;</span>
+                <div class="modal-content">
+                    <img src="" alt="Enlarged memory" id="modal-img">
+                    <p class="modal-caption" id="modal-caption"></p>
+                </div>
+            </div>
+
+        <section class="starry-sky" id="star-container">
+            <h1>✨ Starry Sky Wishes</h1>
+            <p style="color: var(--muted);">Click on the stars to reveal messages from your well-wishers.</p>
+            </section>
+        <div class="star-modal" id="star-modal">
+            <div class="star-modal-content">
+                <span id="star-modal-close">&times;</span>
+                <p id="star-modal-message"></p>
+            </div>
+        </div>
+
+        <div class="chat-box glass-card">
+            <h3>💬 Chat with ProfBot</h3>
+            <div id="messages"></div>
+            <div class="input-area">
+            <input type="text" id="userInput" placeholder="Ask about AI..." onkeypress="if(event.key==='Enter') sendMsg()">
+            <button onclick="sendMsg()">Send</button>
+            </div>
+        </div>
+
+        <h1>🌟 AI Hall of Fame</h1>
+        <section class="legends">
+            <div class="legend-card glass-card"><img src="https://drive.google.com/thumbnail?id=1kq3kAvxPktFcT1BdF_1ofn_6pUcNvKmG&sz=w1000" class="legend-img" alt="Alan Turing"><div class="legend-name">Alan Turing</div><div class="legend-title">Father of Computer Science</div><div class="award">🏆 AI Visionary</div></div>
+            <div class="legend-card glass-card"><img src="https://drive.google.com/thumbnail?id=1q-Q-WzcaVmm_aaF2U_gEEK3bJ8aqPFfe&sz=w1000" class="legend-img" alt="Yann LeCun"><div class="legend-name">Yann LeCun</div><div class="legend-title">Pioneer of Deep Learning</div><div class="award">🏆 NN Innovator</div></div>
+            <div class="legend-card glass-card"><img src="https://drive.google.com/thumbnail?id=1qxvhLV09FwTZ7OXoKm4ztV6KnZgtYNpf&sz=w1000" class="legend-img" alt="Fei-Fei Li"><div class="legend-name">Fei-Fei Li</div><div class="legend-title">Computer Vision Leader</div><div class="award">🏆 AI Ethics Advocate</div></div>
+            <div class="legend-card glass-card"><img src="https://drive.google.com/thumbnail?id=1KXM5MjAtef6ePzWJaHQPdXZ3AL08DFaa&sz=w1000" class="legend-img" alt="Professor"><div class="legend-name">Prof. Prafulla</div><div class="legend-title">Most Inspiring AI Mentor</div><div class="award">🏅 AI Educator of 2025</div></div>
+        </section>
+        <section class="quotes"><div class="quote" id="quoteBox">“AI is not just about machines learning — it’s about humans learning how to think differently.”</div></section>
+        <div class="wrap">
+            <div class="controls"><button id="toggleView">Toggle View</button><button id="downloadPNG">Download Snapshot (PNG)</button></div>
+            <main>
+            <section class="timeline" id="timeline"></section>
+            <section class="details glass-card" id="details">
+                <h3>Profile & Research</h3>
+                <p>Prof. Prafulla has 20+ years of experience across BITS, Mahindra University, and other leading institutions. Research interests include Machine Learning, Computer Vision, Heritage Conservation, and Structural Health Monitoring.</p>
+                <div class="chips" id="chips"></div>
+                <h4 style="margin-top:20px;color:var(--muted)">Selected Publications</h4>
+                <ul id="pubs" style="list-style-type: none; padding-left: 0; margin:8px 0 0 0;color:#cfefff"></ul>
+            </section>
+            </main>
+        </div>
+        <footer>Created with ❤️ by your students | Powered by AI | 2025</footer>
+
     </div>
-  </section>
-
-  <div class="wrap">
-    <div class="controls">
-      <button id="toggleView">Toggle View</button>
-      <button id="downloadPNG">Download Snapshot (PNG)</button>
-    </div>
-    <main>
-      <section class="timeline" id="timeline"></section>
-      <section class="details glass-card" id="details">
-        <h3>Profile & Research</h3>
-        <p id="bioText">Prof. Prafulla is an astute professional with zeal to excel in teaching and research. Over 20+ years of experience across BITS, Mahindra University and other leading institutions. Research interests include Machine Learning, Computer Vision, Heritage Conservation and Structural Health Monitoring.</p>
-        <div class="chips" id="chips"></div>
-        <h4 style="margin-top:20px;color:var(--muted)">Selected Publications</h4>
-        <ul id="pubs" style="list-style-type: none; padding-left: 0; margin:8px 0 0 0;color:#cfefff"></ul>
-      </section>
-    </main>
-  </div>
-
-  <footer>Created with ❤️ by your student | Powered by AI | 2025</footer>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
 
-<script>
+  <script>
+    // =======================================================
+    // === NEW: AUTHENTICATION LOGIC ===
+    // =======================================================
+    // 🚨 IMPORTANT: CHANGE THIS TO YOUR REAL PASSWORD!
+    const SECRET_PASSWORD = 'prafullamambhday'; 
+
+    function checkPassword() {
+        const input = document.getElementById('passwordInput').value.trim();
+        const errorEl = document.getElementById('errorMsg');
+        
+        // Check if the password is correct
+        if (input === SECRET_PASSWORD) {
+            // SUCCESS: Hide the gate and show the content
+            document.getElementById('login-gate').style.display = 'none';
+            document.getElementById('main-content').classList.remove('hidden-content');
+            
+            // Start all the cool page features
+            document.body.classList.add('loaded'); // Re-initiate fade-in effect
+            initBirthdayFeatures();
+            populateGallery();
+            initStarrySky();
+            
+        } else {
+            // FAILURE: Display error
+            errorEl.textContent = '❌ Incorrect secret code. Please try again.';
+            document.getElementById('passwordInput').value = ''; // Clear input
+            document.getElementById('passwordInput').focus();
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.add('loaded');
-        // Proactive greeting from ProfBot
         setTimeout(initiateBotGreeting, 1500);
+        
+        // Initialize all interactive features
+        initBirthdayFeatures();
+        populateGallery();
+        initStarrySky(); // Initialize the new starry sky feature
     });
+
+    
+    const toggleBtn = document.getElementById('toggleView');
+    let horizontal = false;
+    toggleBtn.addEventListener('click', () => {
+      horizontal = !horizontal;
+      if (horizontal) {
+        timeline.classList.add('horizontal');
+        makeAllVisible();
+        timeline.scrollLeft = 0;
+      } else {
+        timeline.classList.remove('horizontal');
+        document.querySelectorAll('.milestone').forEach(m => { m.classList.remove('visible'); });
+        setTimeout(() => { initObserver(); }, 120);
+      }
+    });
+    document.getElementById('downloadPNG').addEventListener('click', async () => {
+      const timelineEl = document.querySelector('.wrap');
+      if (window.html2canvas && timelineEl) {
+        const canvas = await html2canvas(timelineEl, { backgroundColor: '#0a0e1a' });
+        const url = canvas.toDataURL('image/png');
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `prof-prafulla-journey.png`;
+        a.click();
+      } else {
+        alert('Could not generate snapshot. Please try taking a screenshot manually.');
+      }
+    });
+
+    function makeAllVisible() {
+      document.querySelectorAll('.milestone').forEach(m => { m.classList.add('visible'); });
+      if (io) { io.disconnect(); io = null; }
+    }
+    // ==== NEW: STARRY SKY WISH SCRIPT ====
+    function initStarrySky() {
+        const wishes = [
+            "Happy Birthday, Professor! Your guidance is our North Star.",
+            "Wishing you a universe of happiness and success on your special day!",
+            "May your year ahead be as bright and brilliant as the constellations.",
+            "Thank you for illuminating our minds. Have a stellar birthday!",
+            "Another trip around the sun! May it be filled with discovery and joy.",
+            "To our favorite professor, may your birthday sparkle with great moments.",
+            "Your wisdom shines brighter than any star. Happy Birthday!",
+            "Cheers to a mentor who teaches us to reach for the stars. HBD!",
+            "Hope your birthday is out of ther world!",
+            "Wishing you a day filled with cosmic joy and celebration.",
+            "May your day be filled with laughter, learning, and light!",
+            "Happy Birthday! Your guidance makes the impossible possible.",
+            "Wishing you a galaxy of happiness and a universe of love.",
+            "To a brilliant mind and a kind heart – have a stellar day!",
+            "May the year ahead bring new discoveries and endless joy.",
+            "Happy Birthday to the mentor who inspires curiosity every day!",
+            "May your wisdom continue to guide us to new heights.",
+            "Another year older, another year brighter! Happy Birthday!",
+            "Cheers to a teacher whose brilliance lights up every classroom.",
+            "Your passion for knowledge sparks stars in all of us. HBD!",
+            "Wishing you cosmic joy, boundless energy, and a year of wonder.",
+            "May your birthday orbit around happiness, health, and success.",
+            "To the professor who makes learning a journey of delight – happy birthday!",
+            "Your teachings are like stars – they guide us even in darkness.",
+            "Hope your special day shines as brightly as your brilliant mind!",
+            "Happy Birthday! May inspiration and happiness surround you always.",
+            "Wishing you a universe full of adventures and meaningful moments.",
+            "To a mentor who lights the path of knowledge – celebrate big today!",
+            "May your year ahead be filled with discovery, wonder, and delight.",
+            "Another trip around the sun, another reason to celebrate your brilliance!",
+            "Happy Birthday to the mentor who turns curiosity into adventure!",
+            "May your special day be filled with stellar ideas and cosmic joy.",
+            "Wishing you a year as extraordinary as your guidance and wisdom.",
+            "Another orbit around the sun, another year of brilliance!",
+            "Your teaching lights up minds like stars light up the night sky. HBD!",
+            "May your birthday be a constellation of laughter, love, and learning.",
+            "Cheers to the professor who inspires us to dream beyond the skies!",
+            "Hope your year ahead sparkles with creativity and discovery.",
+            "Happy Birthday! May your journey ahead be filled with wonder and success.",
+            "To the guide who makes knowledge shine – celebrate your brilliance today!"
+            // Add as many wishes as you like
+        ];
+
+        const container = document.getElementById('star-container');
+        const modal = document.getElementById('star-modal');
+        const modalMessage = document.getElementById('star-modal-message');
+        const modalClose = document.getElementById('star-modal-close');
+        const numStars = 40; // Number of stars to create
+
+        for (let i = 0; i < numStars; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 3 + 1; // size between 1px and 4px
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.top = `${Math.random() * 90}%`;
+            star.style.left = `${Math.random() * 98}%`;
+            star.style.animationDelay = `${Math.random() * 2}s`;
+            star.style.animationDuration = `${Math.random() * 1 + 1.5}s`;
+
+            // Assign a message to the star
+            const message = wishes[i % wishes.length];
+            star.dataset.message = message;
+
+            star.addEventListener('click', () => {
+                modalMessage.textContent = `"${star.dataset.message}"`;
+                modal.classList.add('show');
+            });
+            container.appendChild(star);
+        }
+
+        const closeModal = () => modal.classList.remove('show');
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+    }
+
+    // ==== BIRTHDAY FEATURES SCRIPT ====
+    function initBirthdayFeatures() {
+        // Confetti
+        const confettiSettings = { target: 'confetti-canvas', max: 150, size: 1, animate: true, props: ['circle', 'square', 'triangle', 'line'], colors: [[165,104,246],[230,61,135],[0,199,228],[253,214,126]], clock: 25 };
+        const confetti = new ConfettiGenerator(confettiSettings);
+        confetti.render();
+
+        // Balloons
+        const balloonContainer = document.getElementById('balloon-container');
+        for (let i = 0; i < 15; i++) {
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            balloon.style.left = `${Math.random() * 100}vw`;
+            balloon.style.animationDuration = `${Math.random() * 5 + 8}s`;
+            balloon.style.animationDelay = `${Math.random() * 4}s`;
+            balloon.style.background = `rgba(${Math.random()*255},${Math.random()*255},${Math.random()*255}, 0.7)`;
+            balloonContainer.appendChild(balloon);
+        }
+
+        // Music Control
+        const musicControl = document.getElementById('music-control');
+        const birthdayMusic = document.getElementById('birthday-music');
+        let isPlaying = false;
+        musicControl.addEventListener('click', () => {
+            if (isPlaying) {
+                birthdayMusic.pause();
+                musicControl.textContent = '▶️ Play';
+            } else {
+                birthdayMusic.play();
+                musicControl.textContent = '⏸️ Pause';
+            }
+            isPlaying = !isPlaying;
+        });
+    }
+
+    // ==== MEMORY GALLERY SCRIPT ====
+    const memoryGalleryData = [
+        { img: 'https://drive.google.com/thumbnail?id=1nSA2SkBhOSMjBpRmPtBstYTUch8Ylk_f&sz=w1000', caption: "Remember that inspiring lecture on neural networks? A true eureka moment!" },
+        { img: 'https://drive.google.com/thumbnail?id=1_dpb_yJu2wHDZbOCKriy_PMoToO2WNrN&sz=w1000', caption: "The day we all worked together on the final project. Great memories!" },
+        { img: 'https://drive.google.com/thumbnail?id=1m87u-28NBKAFFobr1e8gX50ad85muMql&sz=w1000', caption: "Celebrating our success after the conference presentation." },
+        { img: 'https://drive.google.com/thumbnail?id=1w7sDjcf3IK6yBHj_O5QPXYx5m3Ad9UCs&sz=w1000', caption: "A casual discussion that turned into an incredible learning session. Thank you, sir!" },
+        { img: 'https://drive.google.com/thumbnail?id=1gt0GLGx59ZCH38CyvnnvWFINpaH2vJC-&sz=w1000', caption: "A casual discussion that turned into an incredible learning session. Thank you, sir!" },
+        { img: 'https://drive.google.com/thumbnail?id=1Cd0927F5CClXXiWfy9Gky2YNRVq1iqIp&sz=w1000', caption: "A casual discussion that turned into an incredible learning session. Thank you, sir!" },
+        { img: 'https://drive.google.com/thumbnail?id=1higA6IQ7vni8FtQoYtB7UpP_Neo4yQX3&sz=w1000', caption: "A casual discussion that turned into an incredible learning session. Thank you, sir!" },
+        { img: 'https://drive.google.com/thumbnail?id=1pSvGRj4bDgiJ9cCQMmfmPhMgSLJ5mzpN&sz=w1000', caption: "A casual discussion that turned into an incredible learning session. Thank you, sir!" },
+        { img: 'https://drive.google.com/thumbnail?id=1UOHxP4XT3DvOn2I_b7ash5BoCr2ZIxA1&sz=w1000', caption: "A casual discussion that turned into an incredible learning session. Thank you, sir!" },
+        { img: 'https://drive.google.com/thumbnail?id=1Iyz3eChgJNmd0-UyM0RWdoAn2A3OUWDG&sz=w1000', caption: "A casual discussion that turned into an incredible learning session. Thank you, sir!" },
+        // Add more photos and captions here!
+    ];
+    function populateGallery() {
+        const grid = document.getElementById('gallery-grid');
+        grid.innerHTML = '';
+        const modal = document.getElementById('gallery-modal');
+        const modalImg = document.getElementById('modal-img');
+        const modalCaption = document.getElementById('modal-caption');
+        const modalClose = document.getElementById('modal-close');
+
+        memoryGalleryData.forEach(item => {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item glass-card';
+            galleryItem.innerHTML = `<img src="${item.img}" alt="Memory"><div class="caption">${item.caption}</div>`;
+            galleryItem.addEventListener('click', () => {
+                modalImg.src = item.img;
+                modalCaption.textContent = item.caption;
+                modal.classList.add('show');
+            });
+            grid.appendChild(galleryItem);
+        });
+        modalClose.addEventListener('click', () => modal.classList.remove('show'));
+        modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('show'); });
+    }
 
     /* ==== QUOTES ==== */
     const quotes = [
@@ -351,145 +705,26 @@
       }, 700);
     }, 4000);
 
-    /* ==== (NEW) SUPER-COOL INTERACTIVE CHATBOT ==== */
+    // ==== EXISTING CHATBOT & PAGE SCRIPTS ====
     const messagesEl = document.getElementById('messages');
     const userInput = document.getElementById('userInput');
     let botIsTyping = false;
-
-    // Function to add a message to the chat
-    function addMessage(className, html) {
-        const msgDiv = document.createElement('div');
-        msgDiv.className = `msg ${className}`;
-        msgDiv.innerHTML = html;
-        messagesEl.appendChild(msgDiv);
-        messagesEl.scrollTop = messagesEl.scrollHeight;
-        return msgDiv;
-    }
-
-    // New function to simulate typing effect
-    function typeResponse(botMsgDiv, text) {
-        let i = 0;
-        const speed = 30; // Speed of typing in milliseconds
-        botIsTyping = true;
-        userInput.disabled = true;
-
-        function typing() {
-            if (i < text.length) {
-                // Handle HTML tags like <pre> without typing them
-                if (text.charAt(i) === '<') {
-                    const closingTagIndex = text.indexOf('>', i);
-                    botMsgDiv.innerHTML += text.substring(i, closingTagIndex + 1);
-                    i = closingTagIndex;
-                } else {
-                    botMsgDiv.innerHTML += text.charAt(i);
-                }
-                i++;
-                messagesEl.scrollTop = messagesEl.scrollHeight;
-                setTimeout(typing, speed);
-            } else {
-                botIsTyping = false;
-                userInput.disabled = false;
-                userInput.focus();
-            }
-        }
-        typing();
-    }
+    function addMessage(className, html) { const msgDiv = document.createElement('div'); msgDiv.className = `msg ${className}`; msgDiv.innerHTML = html; messagesEl.appendChild(msgDiv); messagesEl.scrollTop = messagesEl.scrollHeight; return msgDiv; }
+    function typeResponse(botMsgDiv, text) { let i = 0; const speed = 30; botIsTyping = true; userInput.disabled = true; function typing() { if (i < text.length) { if (text.charAt(i) === '<') { const c = text.indexOf('>', i); botMsgDiv.innerHTML += text.substring(i, c + 1); i = c; } else { botMsgDiv.innerHTML += text.charAt(i); } i++; messagesEl.scrollTop = messagesEl.scrollHeight; setTimeout(typing, speed); } else { botIsTyping = false; userInput.disabled = false; userInput.focus(); } } typing(); }
+    function highlightElement(selector) { const el = document.querySelector(selector); if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.classList.add('highlight-glow'); setTimeout(() => { el.classList.remove('highlight-glow'); }, 3000); } }
+    const profBotKnowledge = { 'default': "That's a fascinating question! Could you ask me something about the Professor's career or a specific AI topic?", 'greeting': { keywords: ['hello', 'hi'], response: "Hello! I'm ProfBot. Ask me about Prafulla Mam's career, research, or any general AI concepts." }, 'birthday': { keywords: ['birthday', 'happy'], response: "Thank you! Celebrating a great mentor is the most logical and wonderful occasion. The best gift is always more data... I mean, knowledge! 🎂" }, 'research': { keywords: ['research', 'interests'], response: "Prafulla Mam's research is fascinating! She focuses on Machine Learning, Computer Vision, and their applications in areas like Heritage Conservation. A brilliant blend of the old and the new.", elementId: 'details' }, 'mahindra': { keywords: ['mahindra'], response: "She joined Mahindra University in 2017, where she has been an Assistant Professor and was instrumental in co-founding the Center for Sustainable Infrastructure and Systems (CSIS).", milestoneId: 'mahindra' }, 'bits pilani': { keywords: ['bits', 'pilani'], response: "She had a significant tenure at BITS Pilani, Hyderabad Campus, from 2010 to 2017 as a Lecturer. She was heavily involved in developing labs and mentoring numerous student research projects.", milestoneId: 'bits' } };
+    function getBotResponse(userInput) { const text = userInput.toLowerCase(); for (const key in profBotKnowledge) { if (key !== 'default') { for (const keyword of profBotKnowledge[key].keywords) { if (text.includes(keyword)) { return profBotKnowledge[key]; } } } } return { response: profBotKnowledge.default }; }
+    function sendMsg() { if (botIsTyping) return; const text = userInput.value.trim(); if (!text) return; addMessage('user', `🧑‍🎓 You: ${text}`); userInput.value = ''; setTimeout(() => { const botResponseData = getBotResponse(text); const botMsgDiv = addMessage('bot', '🤖 ProfBot: '); typeResponse(botMsgDiv, botResponseData.response); if (botResponseData.elementId) { highlightElement(`#${botResponseData.elementId}`); } else if (botResponseData.milestoneId) { highlightElement(`[data-milestone="${botResponseData.milestoneId}"]`); } }, 800); }
+    function initiateBotGreeting() { const greetText = "Greetings! I'm ProfBot, an AI tribute to Prafulla Mam. You can ask me about her journey, research, or AI concepts! Try asking 'What is her research focus?'."; 
+        
+        // ✅ FIX: Directly add the message instead of animating it
+        addMessage('bot', `🤖 ProfBot: ${greetText}`); 
+        
+        // Since the message is static, we can immediately enable the input field
+        userInput.disabled = false;
+        userInput.focus();
+    }    
     
-    // Function to highlight an element on the page
-    function highlightElement(selector) {
-        const el = document.querySelector(selector);
-        if (el) {
-            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            el.classList.add('highlight-glow');
-            setTimeout(() => {
-                el.classList.remove('highlight-glow');
-            }, 3000); // Glow lasts for 3 seconds
-        }
-    }
-
-    const profBotKnowledge = {
-        'default': "That's a fascinating question. My expertise is centered on Professor Prafulla's journey and core AI principles. Could you ask me something about her career or a specific AI topic?",
-        'greeting': {
-            keywords: ['hello', 'hi', 'hey'],
-            response: "Hello there! I'm ProfBot. Ask me about Professor Prafulla's career, research, or any general AI concepts."
-        },
-        'birthday': {
-            keywords: ['birthday', 'happy'],
-            response: "Thank you! Celebrating a great mentor is the most logical and wonderful occasion. The best gift is always more data... I mean, knowledge! 🎂"
-        },
-        'research': {
-            keywords: ['research', 'interests', 'focus', 'work'],
-            response: "Professor Prafulla's research is fascinating! She focuses on Machine Learning, Computer Vision, and their applications in areas like Heritage Conservation and Structural Health Monitoring. A brilliant blend of the old and the new.",
-            elementId: 'details'
-        },
-        'mahindra': {
-            keywords: ['mahindra'],
-            response: "He joined Mahindra University in 2017, where she has been an Assistant Professor and was instrumental in co-founding the Center for Sustainable Infrastructure and Systems (CSIS).",
-            milestoneId: 'mahindra'
-        },
-        'bits pilani': {
-            keywords: ['bits', 'pilani'],
-            response: "She had a significant tenure at BITS Pilani, Hyderabad Campus, from 2010 to 2017 as a Lecturer. She was heavily involved in developing labs and mentoring numerous student research projects.",
-            milestoneId: 'bits'
-        },
-        'deep learning': {
-            keywords: ['deep learning'],
-            response: "Ah, Deep Learning! It uses multi-layered neural networks to learn from vast amounts of data, much like a human brain. It's the powerhouse behind many AI breakthroughs. 🧠"
-        },
-        'publications': {
-            keywords: ['publications', 'papers'],
-            response: "She has published over 20 articles, with notable works in Springer and IEEE proceedings on topics like digital heritage and structural health monitoring. I can highlight the section for you.",
-            elementId: 'pubs'
-        },
-        'cool': {
-            keywords: ['cool', 'trick', 'generate', 'network'],
-            response: "Certainly! Here's a simple ASCII representation of a neural network's forward pass:<pre style='font-family: monospace; font-size: 12px; color: var(--primary-accent);'>\n  Input(O) --w1--> Hidden(H1) --w3--> Output(O)\n      \\\n       --w2--> Hidden(H2) --w4---^\n</pre>Each connection learns and adapts. It's the core of intelligence!"
-        },
-    };
-
-    function getBotResponse(userInput) {
-        const text = userInput.toLowerCase();
-        for (const key in profBotKnowledge) {
-            if (key !== 'default') {
-                for (const keyword of profBotKnowledge[key].keywords) {
-                    if (text.includes(keyword)) {
-                        return profBotKnowledge[key];
-                    }
-                }
-            }
-        }
-        return { response: profBotKnowledge.default };
-    }
-
-    function sendMsg() {
-        if (botIsTyping) return;
-        const text = userInput.value.trim();
-        if (!text) return;
-
-        addMessage('user', `🧑‍🎓 You: ${text}`);
-        userInput.value = '';
-
-        setTimeout(() => {
-            const botResponseData = getBotResponse(text);
-            const botMsgDiv = addMessage('bot', '🤖 ProfBot: ');
-            typeResponse(botMsgDiv, botResponseData.response);
-
-            if (botResponseData.elementId) {
-                highlightElement(`#${botResponseData.elementId}`);
-            } else if (botResponseData.milestoneId) {
-                highlightElement(`[data-milestone="${botResponseData.milestoneId}"]`);
-            }
-        }, 800);
-    }
-    
-    function initiateBotGreeting() {
-        const greetText = "Greetings! I'm ProfBot, an AI tribute to Professor Prafulla. You can ask me about her journey, research, or AI concepts! Try asking 'What is her research focus?'.";
-        const botMsgDiv = addMessage('bot', '🤖 ProfBot: ');
-        typeResponse(botMsgDiv, greetText);
-    }
-
-
-    /* ==== TIMELINE DATA & RENDERING (MODIFIED) ==== */
     const timelineData = [
        {id: 'tcs', date:'2002 Apr - 2003 Jun', title:'Software Trainee Programmer — TCS (IDM)', content:'Started career at Tata Consultancy Services.', tag:'Industry'},
        {id: 'vignan', date:'2003 Jun - 2007 Jun', title:"Assistant Professor — Vignan's Engg College", content:'Early teaching experience.', tag:'Academia'},
@@ -551,90 +786,11 @@
     const pubsEl = document.getElementById('pubs');
     publications.forEach(p => { const li = document.createElement('li'); li.innerHTML = `&rarr; ${p}`; pubsEl.appendChild(li); });
 
-
-    /* ==== TIMELINE CONTROLS ==== */
-    const toggleBtn = document.getElementById('toggleView');
-    let horizontal = false;
-    toggleBtn.addEventListener('click', () => {
-      horizontal = !horizontal;
-      if (horizontal) {
-        timeline.classList.add('horizontal');
-        makeAllVisible();
-        timeline.scrollLeft = 0;
-      } else {
-        timeline.classList.remove('horizontal');
-        document.querySelectorAll('.milestone').forEach(m => { m.classList.remove('visible'); });
-        setTimeout(() => { initObserver(); }, 120);
-      }
-    });
-    document.getElementById('downloadPNG').addEventListener('click', async () => {
-      const timelineEl = document.querySelector('.wrap');
-      if (window.html2canvas && timelineEl) {
-        const canvas = await html2canvas(timelineEl, { backgroundColor: '#0a0e1a' });
-        const url = canvas.toDataURL('image/png');
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `prof-prafulla-journey.png`;
-        a.click();
-      } else {
-        alert('Could not generate snapshot. Please try taking a screenshot manually.');
-      }
-    });
-
-
-    /* ==== INTERACTIVE NEURAL NETWORK BACKGROUND ==== */
-    const canvas = document.getElementById('neural-network');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    let particlesArray;
-    const mouse = { x: null, y: null, radius: (canvas.height / 120) * (canvas.width / 120) };
-    window.addEventListener('mousemove', event => { mouse.x = event.x; mouse.y = event.y; });
-    window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
-    class Particle {
-        constructor(x, y, directionX, directionY, size, color) { ther.x = x; ther.y = y; ther.directionX = directionX; ther.directionY = directionY; ther.size = size; ther.color = color; }
-        draw() { ctx.beginPath(); ctx.arc(ther.x, ther.y, ther.size, 0, Math.PI * 2, false); ctx.fillStyle = 'rgba(0, 255, 255, 0.5)'; ctx.fill(); }
-        update() { if (ther.x > canvas.width || ther.x < 0) { ther.directionX = -ther.directionX; } if (ther.y > canvas.height || ther.y < 0) { ther.directionY = -ther.directionY; } ther.x += ther.directionX; ther.y += ther.directionY; ther.draw(); }
-    }
-    function init() {
-        particlesArray = [];
-        let numberOfParticles = (canvas.height * canvas.width) / 9000;
-        for (let i = 0; i < numberOfParticles; i++) {
-            let size = (Math.random() * 2) + 1;
-            let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-            let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-            let directionX = (Math.random() * 0.4) - 0.2;
-            let directionY = (Math.random() * 0.4) - 0.2;
-            particlesArray.push(new Particle(x, y, directionX, directionY, size, '#00ffff'));
-        }
-    }
-    function animate() {
-        requestAnimationFrame(animate);
-        ctx.clearRect(0, 0, innerWidth, innerHeight);
-        for (let i = 0; i < particlesArray.length; i++) { particlesArray[i].update(); }
-        connect();
-    }
-    function connect() {
-        let opacityValue = 1;
-        for (let a = 0; a < particlesArray.length; a++) {
-            for (let b = a; b < particlesArray.length; b++) {
-                let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-                    opacityValue = 1 - (distance / 20000);
-                    ctx.strokeStyle = `rgba(0, 255, 255, ${opacityValue})`;
-                    ctx.lineWidth = 1;
-                    ctx.beginPath();
-                    ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-                    ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
-                    ctx.stroke();
-                }
-            }
-        }
-    }
-    window.addEventListener('resize', () => { canvas.width = innerWidth; canvas.height = innerHeight; mouse.radius = (canvas.height / 120) * (canvas.width / 120); init(); });
-    init();
-    animate();
+    const canvas = document.getElementById('neural-network'); const ctx = canvas.getContext('2d'); canvas.width = window.innerWidth; canvas.height = window.innerHeight; let particlesArray;
+    function initNet() { particlesArray = []; let num = (canvas.height * canvas.width) / 9000; for (let i = 0; i < num; i++) { let size = (Math.random() * 2) + 1; let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2); let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2); let dx = (Math.random() * 0.4) - 0.2; let dy = (Math.random() * 0.4) - 0.2; particlesArray.push({x,y,dx,dy,size}); } }
+    function animateNet() { requestAnimationFrame(animateNet); ctx.clearRect(0,0,innerWidth,innerHeight); for(let i=0; i<particlesArray.length; i++){ let p = particlesArray[i]; if(p.x>canvas.width||p.x<0){p.dx=-p.dx;} if(p.y>canvas.height||p.y<0){p.dy=-p.dy;} p.x+=p.dx; p.y+=p.dy; ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2); ctx.fillStyle='rgba(0,255,255,0.5)'; ctx.fill(); } connect(); }
+    function connect() { for(let a=0; a<particlesArray.length; a++){ for(let b=a; b<particlesArray.length; b++){ let dist = ((particlesArray[a].x-particlesArray[b].x)*(particlesArray[a].x-particlesArray[b].x))+((particlesArray[a].y-particlesArray[b].y)*(particlesArray[a].y-particlesArray[b].y)); if(dist<(canvas.width/7)*(canvas.height/7)){ let op = 1-(dist/20000); ctx.strokeStyle=`rgba(0,255,255,${op})`; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(particlesArray[a].x, particlesArray[a].y); ctx.lineTo(particlesArray[b].x, particlesArray[b].y); ctx.stroke(); } } } }
+    initNet(); animateNet();
   </script>
-
 </body>
 </html>
