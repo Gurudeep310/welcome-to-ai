@@ -180,8 +180,12 @@
     }
 
     .modal-content {
-        max-width: 80vw;
-        max-height: 80vh;
+        max-width: 90vw;
+        max-height: 90vh;
+        overflow: auto;
+        display: block;
+        margin: 10% auto;
+        padding: 20px;
         text-align: center;
         transform: scale(0.8);
         transition: transform 0.4s ease;
@@ -420,6 +424,15 @@
     0%, 80%, 100% { transform: scale(0); }
     40% { transform: scale(1.0); }
 }
+#modal-img {
+    /* Remove any max-width/height restrictions that prevent overflow */
+    max-width: none; 
+    max-height: none; 
+    /* Set an initial size or let it size based on its intrinsic size */
+    width: auto; 
+    height: auto;
+    display: block; /* Important for scroll calculations */
+}
   </style>
 
 
@@ -455,10 +468,12 @@
 
             <!-- Modal for enlarged image -->
             <div class="modal" id="gallery-modal">
-                <span class="modal-close" id="modal-close">&times;</span>
                 <div class="modal-content">
-                    <img src="" alt="Enlarged memory" id="modal-img">
-                    <p class="modal-caption" id="modal-caption"></p>
+                    <span class="modal-close" id="modal-close">&times;</span>
+                    <div class="modal-content">
+                        <img class="modal-img" src="" alt="Enlarged memory" id="modal-img">
+                        <p class="modal-caption" id="modal-caption"></p>
+                    </div>
                 </div>
             </div>
 
